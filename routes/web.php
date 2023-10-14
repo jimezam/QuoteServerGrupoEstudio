@@ -28,6 +28,10 @@ Route::get(
 
 Route::middleware(['auth'])
         ->group(function () {
+    // CRUD Quotes
+    Route::get('/quotes/me', [App\Http\Controllers\QuoteController::class, 'indexMine'])->name('quotes.mine');
+    Route::resource('quotes', App\Http\Controllers\QuoteController::class);
+
     // User profile
     Route::get(
         '/profile',

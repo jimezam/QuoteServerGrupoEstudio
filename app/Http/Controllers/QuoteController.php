@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuoteController extends Controller
 {
@@ -14,7 +15,16 @@ class QuoteController extends Controller
         return view('quotes.random_quote', compact('quote'));
     }
 
+    #################################################
 
+    public function indexMine()
+    {
+        $quotes = Quote::where('owner', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+    
+        return view('quotes.index_mine', compact('quotes'));
+    }
 
     #################################################
 
@@ -23,7 +33,9 @@ class QuoteController extends Controller
      */
     public function index()
     {
-        //
+        $quotes = Quote::orderBy('created_at', 'desc')->paginate(5);
+    
+        return view('quotes.index', compact('quotes'));
     }
 
     /**
