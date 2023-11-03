@@ -4,6 +4,9 @@
     <div class="container">
         <h1 class="mb-2">Mis citas</h1>
 
+        <a href="{{ route('quotes.create') }}" 
+           class="btn btn-success">Agregar</a>
+
         @if (count($quotes) > 0)
             <table class="table">
                 <thead class="thead-dark">
@@ -27,7 +30,10 @@
                             <td>{{ $quote->message }}</td>
                             <td>{{ $quote->created_at }}</td>
                             <td>{{ $quote->updated_at }}</td>
-                            <td> ... </td>
+                            <td> ... 
+                                <a href="{{ route('quotes.edit', [$quote->id]) }}" 
+                                   class="btn btn-warning">Editar</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
